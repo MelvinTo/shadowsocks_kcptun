@@ -23,7 +23,7 @@ go get ./...
 
 go build server.go
 
-go build client.go
+go build local.go
 ```
 客户端和服务端使用方法与原版 shadowsocks-go 完全相同，自带加速。
 如果有需要使用单独的 kcptun 和 shadowsocks 客户端进行连接，请注意 kcptun 端口为 shadowsocks 端口号 + 10000。
