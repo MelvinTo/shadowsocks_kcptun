@@ -29,7 +29,7 @@ fi
 
 echo '[*] Lets create our first Shadowsocks user account
 '
-url=""
+url="https://raw.githubusercontent.com/jm33-m0/gfw_scripts/master/ss_add.sh"
 if ! test -e ./ss_add.sh; then
     curl -k -o ss_add.sh $url && chmod 755 ss_add.sh
 fi
