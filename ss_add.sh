@@ -2,6 +2,13 @@
 
 # jm33_m0
 
+path=~/ss/
+if ! test -e ~/ss; then
+    echo "
+[*] Creating Shadowsocks folder at $path
+"
+    mkdir -p ~/ss
+fi
 if [ "$1" != "-i" ]; then
     if [ "$1" == '' ]; then
         echo '
@@ -28,7 +35,7 @@ if ! test -e /var/log/ss; then
     mkdir -p /var/log/ss
 fi
 
-cat << EOF > ~/$user.json
+cat << EOF > $path/$user.json
 {
     "server":"0.0.0.0",
     "method":"aes-256-cfb",
@@ -38,15 +45,17 @@ cat << EOF > ~/$user.json
 EOF
 
 log='/var/log/ss/'$user
-echo 'nohup ssp-server -c ~/'$user'.json > '$log '&' >> ~/ss-run.sh
+echo "nohup ssp-server -c $path/"$user'.json > '$log '&' >> $path/ss-run.sh && chmod 755 $path/ss-run.sh
 
-echo '[*] Now lets apply our changes and check if theres anything wrong...
+echo '
+[*] Now lets apply our changes and check if theres anything wrong...
 '
 
-killall ssp-server && nohup sh ~/ss-run.sh > /dev/null
+killall ssp-server
+nohup sh $path/ss-run.sh > /dev/null
 
-netstat -anp | grep "0.0.0.0:$port" > /dev/null
-if [ $? -eq 1 ]; then
+netstat -anp | grep ":::$port" > /dev/null
+if [ $? -eq 0 ]; then
     echo '
 [-] Something went wrong...
 '
