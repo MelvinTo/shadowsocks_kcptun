@@ -2,7 +2,7 @@
 
 # jm33_m0
 
-if ! test -e $path; then
+if ! test -e ~/ss; then
     echo "
 [*] Creating Shadowsocks folder at $path ...
 "
