@@ -8,6 +8,12 @@ I will guide you through the installation of Shadowsocks-Plus on your Linux serv
 Also, if you wanna add some users later, I will download another script called ss_add_api.sh, you might wanna use it in the future
 '
 
+grep 'CentOS Linux' /etc/os-release > /dev/null
+if [ $? -eq 0 ]; then
+    echo '
+[!] Warning: This script has been tested on CentOS and proved not working, if you insist to use Shadowsocks-Plus on this server, you can search for a docker image that contains ssp or go ahead and fix this issue yourself (if you fixed that, please lemme know)
+'
+
 echo '[*] Installing Shadowsocks-Plus...
 '
 if test -e /usr/bin/ssp-server; then
