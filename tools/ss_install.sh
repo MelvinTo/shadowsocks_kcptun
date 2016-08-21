@@ -42,7 +42,8 @@ if ! test -e ./ss_add_api.sh; then
 fi
 
 $path=~/ss
-echo -n "[*] Setup an API key for further user management with ss_add_api.sh: "
+echo -n "
+[*] Setup an API key for further user management with ss_add_api.sh: "
 read $api_key
 
 cat << EOF > $path/config.json
