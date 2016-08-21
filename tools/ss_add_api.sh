@@ -2,7 +2,12 @@
 
 # jm33_m0
 
-
+if ! test -e $path; then
+    echo "
+[*] Creating Shadowsocks folder at $path ...
+"
+    mkdir -p ~/ss
+fi
 path="~/ss"
 
 # Check if our SSP instance is running fine, if not, launch it
@@ -12,12 +17,6 @@ if [ ! $? -eq 0 ]; then
     bash $path/ss-run.sh
 fi
 
-if ! test -e $path; then
-    echo "
-[*] Creating Shadowsocks folder at $path ...
-"
-    mkdir -p ~/ss
-fi
 if [ "$1" != "-i" ]; then
     if [ "$1" == '' ]; then
         echo '
