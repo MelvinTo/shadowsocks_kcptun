@@ -8,7 +8,7 @@ if ! test -e ~/ss; then
 "
     mkdir -p ~/ss
 fi
-path="~/ss"
+path=~/ss
 
 # Check if our SSP instance is running fine, if not, launch it
 ps -ef | grep "ssp-server" > /dev/null
@@ -34,12 +34,18 @@ else
 '
     echo -n 'Username: '
     read user
-    echo -n 'Port: '
+    echo -n 'Port: (> 1000)'
     read port
+    if [ "$port" == "54320" ];
+        echo -n "
+[-] Can't use this port, you have to change it: "
+        read port
+    fi
     echo -n 'Password: '
     read password
-    echo -n "SSPlus HTTP API Key
-    (the one that you set up before with ss_intall.sh): "
+    echo -n "
+SSPlus HTTP API Key
+(the one that you set up before with ss_intall.sh): "
 	read apiKey
 fi
 

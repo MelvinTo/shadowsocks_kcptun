@@ -4,8 +4,8 @@
 
 echo '
 [+] Welcome!
-    I will guide you through the installation of Shadowsocks-Plus on your Linux server
-    Also, if you wanna add some users later, I will download another script called ss_add_api.sh, you might wanna use it in the future
+I will guide you through the installation of Shadowsocks-Plus on your Linux server
+Also, if you wanna add some users later, I will download another script called ss_add_api.sh, you might wanna use it in the future
 '
 
 echo '[*] Installing Shadowsocks-Plus...
@@ -43,16 +43,19 @@ fi
 
 if ! test -e ~/ss; then
     echo "
-[*] Creating Shadowsocks folder at $path ...
+[*] Creating Shadowsocks folder at $HOME/ss ...
 "
     mkdir -p ~/ss
 fi
-path="~/ss"
+path=~/ss
 
-echo -n "
-[*] Setup an API key for further user management with ss_add_api.sh: "
-read $api_key
+echo -n "[*] Setup an API key for further user management with ss_add_api.sh: "
+read api_key
 
+
+echo '
+[*] Writing config.json...
+'
 cat << EOF > $path/config.json
 {
     "server":"0.0.0.0",
@@ -63,12 +66,13 @@ cat << EOF > $path/config.json
 EOF
 
 # start instance
-grep "-hkey $api_Key" $path/ss-run.sh > /dev/null
-if [ ! $? -eq 0 ]; then
-	echo "nohup ssp-server -c $path/config.json -api 127.0.0.1:5333 -hkey $api_key > /dev/null &" > $path/ss-run.sh
+if [ $? -eq 0 ]; then
+	echo 'nohup ssp-server -c '$path'/config.json -api 127.0.0.1:5333 -hkey '$api_key' > /dev/null &' > $path/ss-run.sh
 	chmod 755 $path/ss-run.sh
 	bash $path/ss-run.sh
+else
+    echo "[!] Yea I am bored..."
 fi
 
 # Run ss_add to add a user
-bash ss_add_api.sh -i
+./ss_add_api.sh -i
