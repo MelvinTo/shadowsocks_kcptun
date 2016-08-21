@@ -41,7 +41,7 @@ if ! test -e ./ss_add_api.sh; then
     curl -k -o ss_add_api.sh $url > /dev/null && chmod 755 ss_add_api.sh
 fi
 
-$path=~/ss
+$path="~/ss"
 echo -n "
 [*] Setup an API key for further user management with ss_add_api.sh: "
 read $api_key

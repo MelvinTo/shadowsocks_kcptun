@@ -3,7 +3,7 @@
 # jm33_m0
 
 
-path=~/ss
+path="~/ss"
 
 # Check if our SSP instance is running fine, if not, launch it
 ps -ef | grep "ssp-server" > /dev/null
