@@ -45,6 +45,14 @@ $path=~/ss
 echo -n "[*] Setup an API key for further user management with ss_add_api.sh: "
 read $api_key
 
+cat << EOF > $path/config.json
+{
+    "server":"0.0.0.0",
+    "method":"aes-256-cfb",
+    "server_port":54320,
+    "password":"doNotTouch"
+}
+
 # start instance
 grep "-hkey $api_Key" $path/ss-run.sh > /dev/null
 if [ ! $? -eq 0 ]; then
