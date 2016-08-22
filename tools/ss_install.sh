@@ -13,6 +13,7 @@ if [ $? -eq 0 ]; then
     echo '
 [!] Warning: This script has been tested on CentOS and proved not working, if you insist to use Shadowsocks-Plus on this server, you can search for a docker image that contains ssp or go ahead and fix this issue yourself (if you fixed that, please lemme know)
 '
+fi
 
 echo '[*] Installing Shadowsocks-Plus...
 '
