@@ -32,7 +32,7 @@ fi
 curl -s -k -o ssp-server https://raw.githubusercontent.com/shadowsocks-plus/shadowsocks-plus/master/builds/server && chmod 755 ssp-server && cp ssp-server /usr/bin/
 
 if test -e /usr/bin/ssp-server; then
-    echo '[+] Installation was succeed
+    echo '[+] Installation succeeded
     '
 else
     echo '[-] Failed to install
