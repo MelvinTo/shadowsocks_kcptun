@@ -2,7 +2,7 @@
 
 - `ss_install.sh`
 
-    用于服务器端的一键安装 `wget https://raw.githubusercontent.com/jm33-m0/gfw_scripts/master/ss_install.sh && bash ss_install.sh`
+    用于服务器端的一键安装 `wget https://raw.githubusercontent.com/shadowsocks-plus/shadowsocks-plus/master/tools/ss_install.sh && bash ss_install.sh`
 
 - `ss_add_api.sh`
 

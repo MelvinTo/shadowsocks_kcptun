@@ -13,6 +13,7 @@ if [ $? -eq 0 ]; then
     echo '
 [!] Warning: This script has been tested on CentOS and proved not working, if you insist to use Shadowsocks-Plus on this server, you can search for a docker image that contains ssp or go ahead and fix this issue yourself (if you fixed that, please lemme know)
 '
+fi
 
 echo '[*] Installing Shadowsocks-Plus...
 '
@@ -24,14 +25,14 @@ fi
 
 # Download user manager
 if ! test -e /usr/bin/loadUserDatabase; then
-    curl -s -k -o /usr/bin/loadUserDatabase "https://raw.githubusercontent.com/jm33-m0/gfw_scripts/master/userManager/loadUserDatabase" && chmod 755 /usr/bin/loadUserDatabase
+    curl -s -k -o /usr/bin/loadUserDatabase "https://raw.githubusercontent.com/jm33-m0/gfw_scripts/master/ssplus/loadUserDatabase" && chmod 755 /usr/bin/loadUserDatabase
 fi
 
 # Download ssp-server and install it to /usr/bin
-curl -s -k -o ssp-server  https://raw.githubusercontent.com/shadowsocks-plus/shadowsocks-plus/master/server && chmod 755 ssp-server && cp ssp-server /usr/bin/
+curl -s -k -o ssp-server https://raw.githubusercontent.com/shadowsocks-plus/shadowsocks-plus/master/builds/server && chmod 755 ssp-server && cp ssp-server /usr/bin/
 
 if test -e /usr/bin/ssp-server; then
-    echo '[+] Installation was succeed
+    echo '[+] Installation succeeded
     '
 else
     echo '[-] Failed to install
@@ -42,7 +43,7 @@ fi
 # Download ss_add_api.sh to add first Shadowsocks-Plus user and launch a base ssp instance with HTTP API
 echo '[*] Lets create our first Shadowsocks user account
 '
-url="https://raw.githubusercontent.com/jm33-m0/gfw_scripts/master/ss_add_api.sh"
+url="https://raw.githubusercontent.com/jm33-m0/gfw_scripts/master/ssplus/ss_add_api.sh"
 if ! test -e ./ss_add_api.sh; then
     curl -s -k -o ss_add_api.sh $url && chmod 755 ss_add_api.sh
 fi

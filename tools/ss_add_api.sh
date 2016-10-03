@@ -36,7 +36,7 @@ else
     read user
     echo -n 'Port: (> 1000)'
     read port
-    if [ "$port" == "54320" ];
+    if [ "$port" == "54320" ]; then
         echo -n "
 [-] Can't use this port, you have to change it: "
         read port
