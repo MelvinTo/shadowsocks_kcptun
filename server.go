@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"encoding/binary"
-	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -307,8 +306,7 @@ func enoughOptions(config *ss.Config) bool {
 func unifyPortPassword(config *ss.Config) (err error) {
 	if len(config.PortPassword) == 0 { // this handles both nil PortPassword and empty one
 		if !enoughOptions(config) {
-			fmt.Fprintln(os.Stderr, "must specify both port and password")
-			return errors.New("not enough options")
+			return
 		}
 		port := strconv.Itoa(config.ServerPort)
 		config.PortPassword = map[string]string{port: config.Password}
