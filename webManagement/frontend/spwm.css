@@ -1,0 +1,14 @@
+body {
+    background-color: #0066CC;
+    text-align:center;
+    padding: 0px 0px;
+}
+
+#content-box {
+    background-color: #FFFFFF;
+    margin-top: 80px;
+    padding: 10px 10px;
+    min-height: 80px;
+    box-shadow: 0 0 10px #FFFFFF;
+    max-width: 500px;
+}

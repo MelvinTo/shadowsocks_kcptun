@@ -1,0 +1,60 @@
+<div id="panel">
+    <div class="button-for-click" onclick="loadContent('panel.html')" style="margin-bottom:10px">重新加载</div>
+    <div class="item-title">端口列表</div>
+    <table id="panelPortList"></table>
+    <div class="item-title">添加用户</div>
+    <input type="text" id="newUser_Port" placeholder="端口" /><br><br>
+    <input type="text" id="newUser_Pw" placeholder="密码" /><br><br>
+    <div class="button-for-click" onclick="addUser()" style="margin-bottom:10px">添加</div>
+</div>
+
+<style>
+    #panel {
+        text-align:left;
+    }
+    .button-for-click {
+        background-color: #FFFFFF;
+        border: 1px solid #7F7F7F;
+        color: #000000;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+    }
+    .item-title {
+        font-size:24px;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+</style>
+
+<script>
+    $.ajaxSetup({
+        error: function(x,e) {
+            alert("AJAX 请求失败。");
+        }
+    });
+    $.get(targetApiPrefix + "listUsers", function(resp) {
+        try {
+            var respData = JSON.parse(resp);
+        } catch(e) {
+            alert(e);
+            return;
+        }
+        for(var itemId in respData) {
+            var item = respData[itemId];
+            var newElem = document.createElement("tr");
+            newElem.innerHTML = item.toString();
+            document.getElementById("panelPortList").appendChild(newElem);
+        }
+    });
+
+    function addUser() {
+        var userPort = $("#newUser_Port").val();
+        var userPw = $("#newUser_Pw").val();
+        $.get(targetApiPrefix + "addUser/port="+encodeURIComponent(userPort)+"&pw="+encodeURIComponent(userPw),function(resp) {
+            if(resp == "OK") alert("端口为 " + userPort + " 的用户添加成功。");
+            else alert("用户添加失败: "+resp);
+        });
+    }
+</script>

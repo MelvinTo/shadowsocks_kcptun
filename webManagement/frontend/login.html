@@ -1,0 +1,87 @@
+<script>
+    var doLogin_locked = false;
+    var targetApiPrefix = "";
+    var useHttps = false;
+    function doLogin() {
+        if(doLogin_locked) return;
+        $("#submit-button").css("background-color","#7F7F7F");
+        doLogin_locked = true;
+        var targetApiAddr = $("#targetApiAddr").val();
+        var targetApiKey = $("#targetApiKey").val();
+        var protPrefix = "http://";
+        if(useHttps) protPrefix = "https://";
+        targetApiPrefix = protPrefix + targetApiAddr + "/" + targetApiKey + "/";
+        $.ajaxSetup({
+            error: function(x,e) {
+                $("#submit-button").css("background-color","#EE1111");
+                $("#submit-button").html("登录失败");
+                setTimeout(function() {
+                    $("#submit-button").css("background-color","#0077DD");
+                    $("#submit-button").html("登录");
+                    doLogin_locked = false;
+                },2000);
+            }
+        });
+        $.get(targetApiPrefix + "ping",function(resp) {
+            if(resp == "Pong") {
+                loadContent("panel.html");
+            } else {
+                $("#submit-button").css("background-color","#EE1111");
+                $("#submit-button").html("登录失败");
+                setTimeout(function() {
+                    $("#submit-button").css("background-color","#0077DD");
+                    $("#submit-button").html("登录");
+                    doLogin_locked = false;
+                },2000);
+            }
+        });
+    }
+    function toggleHttps() {
+        if(useHttps) {
+            $("#apiUseHttps").css("background-color","#FFFFFF");
+            $("#apiUseHttps").css("color","#000000");
+            $("#apiUseHttps").css("border","1px solid #7F7F7F");
+            useHttps = false;
+        } else {
+            $("#apiUseHttps").css("background-color","#11EE11");
+            $("#apiUseHttps").css("color","#FFFFFF");
+            $("#apiUseHttps").css("border","1px solid #11EE11");
+            useHttps = true;
+        }
+    }
+</script>
+
+<style>
+    #submit-button {
+        background-color: #0077DD;
+        color: #FFFFFF;
+        margin-bottom: -10px;
+        margin-left: -10px;
+        margin-right: -10px;
+        width: 100% + 20px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+    }
+    .select-trueorfalse {
+        background-color: #FFFFFF;
+        border: 1px solid #7F7F7F;
+        color: #000000;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+    }
+</style>
+
+
+<input type="text" id="targetApiAddr" style="width:100%" placeholder="HTTP API 监听地址" /><br>
+<br>
+
+<input type="text" id="targetApiKey" style="width:100%" placeholder="Access Key" /><br>
+<br>
+
+<div class="select-trueorfalse" id="apiUseHttps" onclick="toggleHttps()">使用 HTTPS</div>
+<br>
+
+<div id="submit-button" onclick="doLogin()">登录</div>
