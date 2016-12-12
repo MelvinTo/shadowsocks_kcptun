@@ -14,8 +14,7 @@
 
     同上，使用多进程运行SSPlus，需要重启服务
 
-- `run-ssp.exe`
-
+- `run-ssp.exe` （请使用[https://github.com/shadowsocks-plus/Shadowsocks-Plus-Win](https://github.com/shadowsocks-plus/Shadowsocks-Plus-Win)）
     Windows下的SSPlus客户端简单启动脚本
 
 - `loadUserDatabase`
